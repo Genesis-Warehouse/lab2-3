@@ -23,12 +23,6 @@ def create_product(product: schemas.ProductCreate, db: Session = Depends(get_db)
     db_product = crud.create_product(db=db, product=product)
     return db_product
 
-# Эндпоинт для получения списка продуктов
-@app.get("/products/", response_model=List[schemas.Product])
-def read_products(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    products = crud.get_products(db, skip=skip, limit=limit)
-    return products
-
 # Эндпоинт для получения продукта по ID
 @app.get("/products/{product_id}", response_model=schemas.Product)
 def read_product(product_id: int, db: Session = Depends(get_db)):
@@ -53,16 +47,10 @@ def delete_product(product_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Product not found")
     return db_product
 
-###
 
-# CRUD for Storage Conditions
 @app.post("/storage_conditions/", response_model=schemas.StorageCondition)
 def create_storage_condition(condition: schemas.StorageConditionCreate, db: Session = Depends(get_db)):
     return crud.create_storage_condition(db=db, condition=condition)
-
-@app.get("/storage_conditions/", response_model=List[schemas.StorageCondition])
-def read_storage_conditions(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    return crud.get_storage_conditions(db, skip=skip, limit=limit)
 
 @app.get("/storage_conditions/{condition_id}", response_model=schemas.StorageCondition)
 def read_storage_condition(condition_id: int, db: Session = Depends(get_db)):
@@ -79,14 +67,9 @@ def update_storage_condition(condition_id: int, condition: schemas.StorageCondit
 def delete_storage_condition(condition_id: int, db: Session = Depends(get_db)):
     return crud.delete_storage_condition(db, condition_id)
 
-# CRUD for Warehouse Sections
 @app.post("/warehouse_sections/", response_model=schemas.WarehouseSection)
 def create_warehouse_section(section: schemas.WarehouseSectionCreate, db: Session = Depends(get_db)):
     return crud.create_warehouse_section(db=db, section=section)
-
-@app.get("/warehouse_sections/", response_model=List[schemas.WarehouseSection])
-def read_warehouse_sections(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    return crud.get_warehouse_sections(db, skip=skip, limit=limit)
 
 @app.get("/warehouse_sections/{section_id}", response_model=schemas.WarehouseSection)
 def read_warehouse_section(section_id: int, db: Session = Depends(get_db)):
@@ -103,14 +86,9 @@ def update_warehouse_section(section_id: int, section: schemas.WarehouseSectionC
 def delete_warehouse_section(section_id: int, db: Session = Depends(get_db)):
     return crud.delete_warehouse_section(db, section_id)
 
-# CRUD for Inventory
 @app.post("/inventory/", response_model=schemas.Inventory)
 def create_inventory(inventory: schemas.InventoryCreate, db: Session = Depends(get_db)):
     return crud.create_inventory(db=db, inventory=inventory)
-
-@app.get("/inventory/", response_model=List[schemas.Inventory])
-def read_inventory(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    return crud.get_inventory(db, skip=skip, limit=limit)
 
 @app.get("/inventory/{inventory_id}", response_model=schemas.Inventory)
 def read_inventory_item(inventory_id: int, db: Session = Depends(get_db)):
@@ -127,14 +105,9 @@ def update_inventory(inventory_id: int, inventory: schemas.InventoryCreate, db: 
 def delete_inventory(inventory_id: int, db: Session = Depends(get_db)):
     return crud.delete_inventory(db, inventory_id)
 
-# CRUD for Batches
 @app.post("/batches/", response_model=schemas.Batch)
 def create_batch(batch: schemas.BatchCreate, db: Session = Depends(get_db)):
     return crud.create_batch(db=db, batch=batch)
-
-@app.get("/batches/", response_model=List[schemas.Batch])
-def read_batches(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    return crud.get_batches(db, skip=skip, limit=limit)
 
 @app.get("/batches/{batch_id}", response_model=schemas.Batch)
 def read_batch(batch_id: int, db: Session = Depends(get_db)):
@@ -151,14 +124,9 @@ def update_batch(batch_id: int, batch: schemas.BatchCreate, db: Session = Depend
 def delete_batch(batch_id: int, db: Session = Depends(get_db)):
     return crud.delete_batch(db, batch_id)
 
-# CRUD for QR Codes
 @app.post("/qrcodes/", response_model=schemas.QRCode)
 def create_qrcode(qrcode: schemas.QRCodeCreate, db: Session = Depends(get_db)):
     return crud.create_qrcode(db=db, qrcode=qrcode)
-
-@app.get("/qrcodes/", response_model=List[schemas.QRCode])
-def read_qrcodes(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    return crud.get_qrcodes(db, skip=skip, limit=limit)
 
 @app.get("/qrcodes/{qrcode_id}", response_model=schemas.QRCode)
 def read_qrcode(qrcode_id: int, db: Session = Depends(get_db)):

@@ -18,7 +18,7 @@ class Product(ProductBase):
     expiration_date: date
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 # Схема для условий хранения
 class StorageConditionBase(BaseModel):
@@ -33,7 +33,7 @@ class StorageCondition(StorageConditionBase):
     id: int  # Уникальный идентификатор условий хранения
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 # Схема для секции склада
 class WarehouseSectionBase(BaseModel):
@@ -48,7 +48,7 @@ class WarehouseSection(WarehouseSectionBase):
     condition_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 # Схема для инвентаря
 class InventoryBase(BaseModel):
@@ -63,7 +63,7 @@ class Inventory(InventoryBase):
     product_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 # Схема для партии продуктов
 class BatchBase(BaseModel):
@@ -78,7 +78,7 @@ class Batch(BatchBase):
     product_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 # Схема для QR-кода
 class QRCodeBase(BaseModel):
@@ -92,4 +92,4 @@ class QRCode(QRCodeBase):
     batch_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
