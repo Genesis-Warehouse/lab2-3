@@ -1,0 +1,55 @@
+version: "3.4"
+
+services:
+  webapi:
+    image: fastapi
+    container_name: backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    networks:
+      - webapp
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  db:
+    image: postgres:16-alpine
+    container_name: postgres
+    networks:
+      - webapp
+    environment:
+      PGPORT: 5432
+      POSTGRES_DB: genesiswarehouse
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    volumes:
+      - "/var/run/postgres/postgres.sock:/var/run/postgres/postgres.sock"
+      - "dbdata:/var/lib/postgresql/data"
+    restart: unless-stopped
+
+  db-panel:
+    image: dpage/pgadmin4:7.7
+    container_name: pgadmin
+    depends_on:
+      - db
+    networks:
+      - webapp
+    environment:
+      PGADMIN_DEFAULT_EMAIL: example@email.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_SERVER_JSON_FILE: /pgadmin4/servers.json
+    ports:
+      - "8081:80"
+    volumes:
+      - "./pgadmin_config/config.json:/pgadmin4/servers.json:ro"
+    restart: unless-stopped
+
+networks:
+  webapp:
+    driver: bridge
+
+volumes:
+  dbdata:
