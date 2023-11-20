@@ -29,10 +29,8 @@ def create_product(product: schemas.ProductCreate, db: Session = Depends(get_db)
 
 
 @app.get("/products/all")
-def read_products(db: Session = Depends(get_db)):
-    db_products = crud.get_products(db)
-    if db_products is None:
-        raise HTTPException(status_code=404, detail="Product not found")
+def read_product_all(db: Session = Depends(get_db)):
+    db_products = crud.get_product_all(db)
     return db_products
 
 
@@ -68,6 +66,12 @@ def create_storage_condition(condition: schemas.StorageConditionCreate, db: Sess
     return crud.create_storage_condition(db=db, condition=condition)
 
 
+@app.get("/storage_conditions/all")
+def read_storage_conditions_all(db: Session = Depends(get_db)):
+    db_condition = crud.get_storage_condition_all(db)
+    return db_condition
+
+
 @app.get("/storage_conditions/{condition_id}", response_model=schemas.StorageCondition)
 def read_storage_condition(condition_id: int, db: Session = Depends(get_db)):
     condition = crud.get_storage_condition(db, condition_id=condition_id)
@@ -90,6 +94,12 @@ def delete_storage_condition(condition_id: int, db: Session = Depends(get_db)):
 @app.post("/warehouse_sections/", response_model=schemas.WarehouseSection)
 def create_warehouse_section(section: schemas.WarehouseSectionCreate, db: Session = Depends(get_db)):
     return crud.create_warehouse_section(db=db, section=section)
+
+
+@app.get("/warehouse_sections/all")
+def read_warehouse_section_all(db: Session = Depends(get_db)):
+    db_section = crud.get_warehouse_section_all(db)
+    return db_section
 
 
 @app.get("/warehouse_sections/{section_id}", response_model=schemas.WarehouseSection)
@@ -116,6 +126,12 @@ def create_inventory(inventory: schemas.InventoryCreate, db: Session = Depends(g
     return crud.create_inventory(db=db, inventory=inventory)
 
 
+@app.get("/inventory/all")
+def read_inventory_all(db: Session = Depends(get_db)):
+    db_inventory = crud.get_inventory_all(db)
+    return db_inventory
+
+
 @app.get("/inventory/{inventory_id}", response_model=schemas.Inventory)
 def read_inventory_item(inventory_id: int, db: Session = Depends(get_db)):
     inventory_item = crud.get_inventory_item(db, inventory_id=inventory_id)
@@ -139,6 +155,12 @@ def create_batch(batch: schemas.BatchCreate, db: Session = Depends(get_db)):
     return crud.create_batch(db=db, batch=batch)
 
 
+@app.get("/batches/all")
+def read_batches_all(db: Session = Depends(get_db)):
+    db_batches = crud.get_batch_all(db)
+    return db_batches
+
+
 @app.get("/batches/{batch_id}", response_model=schemas.Batch)
 def read_batch(batch_id: int, db: Session = Depends(get_db)):
     batch = crud.get_batch(db, batch_id=batch_id)
@@ -160,6 +182,12 @@ def delete_batch(batch_id: int, db: Session = Depends(get_db)):
 @app.post("/qrcodes/", response_model=schemas.QRCode)
 def create_qrcode(qrcode: schemas.QRCodeCreate, db: Session = Depends(get_db)):
     return crud.create_qrcode(db=db, qrcode=qrcode)
+
+
+@app.get("/qrcodes/all")
+def read_qrcodes_all(db: Session = Depends(get_db)):
+    db_qrcodes = crud.get_qr_code_all(db)
+    return db_qrcodes
 
 
 @app.get("/qrcodes/{qrcode_id}", response_model=schemas.QRCode)

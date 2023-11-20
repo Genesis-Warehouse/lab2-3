@@ -10,10 +10,8 @@ def get_product(db: Session, product_id: int):
     return db.query(models.Product).filter(models.Product.id == product_id).first()
 
 
-def get_products(db: Session):
-    statement = select(models.Product)
-    prod_obj = db.scalars(statement).all
-    return prod_obj
+def get_product_all(db: Session):
+    return db.query(models.Product).all()
 
 
 def create_product(db: Session, product: schemas.ProductCreate):
@@ -49,6 +47,10 @@ def delete_product(db: Session, product_id: int):
 
 def get_storage_condition(db: Session, condition_id: int):
     return db.query(models.StorageCondition).filter(models.StorageCondition.id == condition_id).first()
+
+
+def get_storage_condition_all(db: Session):
+    return db.query(models.StorageCondition).all()
 
 
 def create_storage_condition(db: Session, storage_condition: schemas.StorageConditionCreate):
@@ -87,6 +89,10 @@ def get_warehouse_section(db: Session, section_id: int):
     return db.query(models.WarehouseSection).filter(models.WarehouseSection.id == section_id).first()
 
 
+def get_warehouse_section_all(db: Session):
+    return db.query(models.WarehouseSection).all()
+
+
 def create_warehouse_section(db: Session, warehouse_section: schemas.WarehouseSectionCreate):
     db_section = models.WarehouseSection(**warehouse_section.model_dump())
     db.add(db_section)
@@ -120,6 +126,10 @@ def delete_warehouse_section(db: Session, section_id: int):
 
 def get_inventory(db: Session, inventory_id: int):
     return db.query(models.Inventory).filter(models.Inventory.id == inventory_id).first()
+
+
+def get_inventory_all(db: Session):
+    return db.query(models.Inventory).all()
 
 
 def create_inventory(db: Session, inventory: schemas.InventoryCreate):
@@ -157,6 +167,10 @@ def get_batch(db: Session, batch_id: int):
     return db.query(models.Batch).filter(models.Batch.id == batch_id).first()
 
 
+def get_batch_all(db: Session):
+    return db.query(models.Batch).all()
+
+
 def create_batch(db: Session, batch: schemas.BatchCreate):
     db_batch = models.Batch(**batch.model_dump())
     db.add(db_batch)
@@ -190,6 +204,10 @@ def delete_batch(db: Session, batch_id: int):
 
 def get_qr_code(db: Session, qr_id: int):
     return db.query(models.QRCode).filter(models.QRCode.id == qr_id).first()
+
+
+def get_qr_code_all(db: Session):
+    return db.query(models.QRCode).all()
 
 
 def create_qr_code(db: Session, qr_code: schemas.QRCodeCreate):
