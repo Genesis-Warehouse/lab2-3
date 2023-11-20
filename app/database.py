@@ -1,8 +1,9 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+import env
 
-SQLALCHEMY_DATABASE_URL = "postgresql://myuser:mypassword@localhost/genesiswarehouse"
+SQLALCHEMY_DATABASE_URL = env.DATA_BASE
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
