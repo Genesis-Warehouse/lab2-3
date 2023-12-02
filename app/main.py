@@ -12,7 +12,7 @@ models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-origins = ["http://localhost:8080","http://localhost:8000"]
+origins = ["http://localhost:8080", "http://localhost:8000"]
 
 app.add_middleware(
     CORSMiddleware,
@@ -79,7 +79,7 @@ def delete_product(product_id: int, db: Session = Depends(get_db)):
 
 @app.post("/storage_conditions/", response_model=schemas.StorageCondition)
 def create_storage_condition(condition: schemas.StorageConditionCreate, db: Session = Depends(get_db)):
-    return crud.create_storage_condition(db=db, condition=condition)
+    return crud.create_storage_condition(db=db, storage_condition=condition)
 
 
 @app.get("/storage_conditions/all")
@@ -109,7 +109,7 @@ def delete_storage_condition(condition_id: int, db: Session = Depends(get_db)):
 
 @app.post("/warehouse_sections/", response_model=schemas.WarehouseSection)
 def create_warehouse_section(section: schemas.WarehouseSectionCreate, db: Session = Depends(get_db)):
-    return crud.create_warehouse_section(db=db, section=section)
+    return crud.create_warehouse_section(db=db, warehouse_section=section)
 
 
 @app.get("/warehouse_sections/all")
