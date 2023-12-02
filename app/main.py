@@ -12,7 +12,7 @@ models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-origins = ["http://localhost", "http://backend"]
+origins = ["http://localhost:8080","http://localhost:8000"]
 
 app.add_middleware(
     CORSMiddleware,
@@ -23,9 +23,9 @@ app.add_middleware(
 )
 
 
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=5000)
+# if __name__ == "__main__":
+#     import uvicorn
+#     uvicorn.run(app, host="0.0.0.0", port=5000)
 
 
 # Dependency для создания сессии с базой данных
