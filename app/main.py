@@ -150,7 +150,7 @@ def read_inventory_all(db: Session = Depends(get_db)):
 
 @app.get("/inventory/{inventory_id}", response_model=schemas.Inventory)
 def read_inventory_item(inventory_id: int, db: Session = Depends(get_db)):
-    inventory_item = crud.get_inventory_item(db, inventory_id=inventory_id)
+    inventory_item = crud.get_inventory(db, inventory_id=inventory_id)
     if inventory_item is None:
         raise HTTPException(status_code=404, detail="Inventory item not found")
     return inventory_item
