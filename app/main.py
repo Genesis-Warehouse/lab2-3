@@ -196,29 +196,29 @@ def delete_batch(batch_id: int, db: Session = Depends(get_db)):
 
 
 @app.post("/qrcodes/", response_model=schemas.QRCode)
-def create_qrcode(qrcode: schemas.QRCodeCreate, db: Session = Depends(get_db)):
-    return crud.create_qrcode(db=db, qrcode=qrcode)
+def create_qr_code(qrcode: schemas.QRCodeCreate, db: Session = Depends(get_db)):
+    return crud.create_qr_code(db, qrcode)
 
 
 @app.get("/qrcodes/all")
-def read_qrcodes_all(db: Session = Depends(get_db)):
+def read_qr_code_all(db: Session = Depends(get_db)):
     db_qrcodes = crud.get_qr_code_all(db)
     return db_qrcodes
 
 
 @app.get("/qrcodes/{qrcode_id}", response_model=schemas.QRCode)
-def read_qrcode(qrcode_id: int, db: Session = Depends(get_db)):
-    qrcode = crud.get_qrcode(db, qrcode_id=qrcode_id)
+def read_qr_code(qrcode_id: int, db: Session = Depends(get_db)):
+    qrcode = crud.get_qr_code(db, qrcode_id)
     if qrcode is None:
         raise HTTPException(status_code=404, detail="QRCode not found")
     return qrcode
 
 
 @app.put("/qrcodes/{qrcode_id}", response_model=schemas.QRCode)
-def update_qrcode(qrcode_id: int, qrcode: schemas.QRCodeCreate, db: Session = Depends(get_db)):
-    return crud.update_qrcode(db, qrcode_id, qrcode)
+def update_qr_code(qrcode_id: int, qrcode: schemas.QRCodeCreate, db: Session = Depends(get_db)):
+    return crud.update_qr_code(db, qrcode_id, qrcode)
 
 
 @app.delete("/qrcodes/{qrcode_id}", response_model=schemas.QRCode)
-def delete_qrcode(qrcode_id: int, db: Session = Depends(get_db)):
-    return crud.delete_qrcode(db, qrcode_id)
+def delete_qr_code(qrcode_id: int, db: Session = Depends(get_db)):
+    return crud.delete_qr_code(db, qrcode_id)
